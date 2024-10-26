@@ -1,0 +1,67 @@
+.cars{
+    padding: 2rem;
+    &__content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 2rem 0; 
+    }
+
+    &__title{
+        font-size: 2rem;
+        color: #503a3a;
+        font-weight: 600;
+    }
+}
+.card{
+    position: relative;
+    padding: 1rem;
+    width: 300px;
+    border-radius: 1rem;
+    background-color: #E8F5E9;
+
+    &__header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        &-brand{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &__brand{
+        position: absolute;
+        /* z-index: -1; */
+        color: rgba(0, 0, 0, 0.1);
+        left: 52%;
+        top: 50%;
+        /* transform: translateX(-50%) translateY(-50%); */
+        font-size: 4rem;
+        font-weight: bold;
+        width: 100%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__brandImg{
+        width: 50px;
+    }
+    &__brand-name{
+        font-weight: 500;
+        font-style: italic;
+        color: #2e2828;
+    }
+
+    &__img{
+        width: 300px;
+    }
+
+    &__footer{
+        display: flex;
+        justify-content: space-between;
+    }
+}

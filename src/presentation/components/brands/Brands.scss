@@ -1,0 +1,36 @@
+.brands{
+    width: 100%;
+    padding: 2rem 0;
+    text-align: center;
+    background-color: #fff;
+
+    &__title{
+        font-size: 2rem;
+        font-weight: 600;
+        line-height: 28px;
+        color: #f65151;
+    }
+    &__content{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+        margin-top: 1rem;
+
+        &-img{
+            width: 150px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        &__title{
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 38px;
+        }
+        &__content{
+            gap: 100px;
+        }
+    }
+}
