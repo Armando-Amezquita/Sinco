@@ -1,0 +1,30 @@
+.accordion__item {
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+
+    .accordion__header {
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .accordion__content {
+        padding: 0.5rem 0;
+        color: #555;
+    }
+}
+
+.accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.accordion__content--open {
+    max-height: 500px;
+    height: auto;
+    opacity: 1;
+}
