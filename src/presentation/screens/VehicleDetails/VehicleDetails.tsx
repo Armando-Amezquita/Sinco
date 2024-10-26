@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { Button } from "@mui/material";
 import img from "../../../assets/images/car.png"
-import './VehicleDetails.scss'
 import { AccordionItem } from "../../components/utils/Accordion/Accordion";
 import { Navbar } from "../../components/Navbar/Navbar";
+import { ModalVehicle } from "../../components/ModalVehicle/ModalVehicle";
+import './VehicleDetails.scss'
 
 export const VehicleDetails = () => {
+
+    const [openModal, setOpenModal] = useState<boolean>(false);
+
     return (
         <div className="details">
             <Navbar />
@@ -26,10 +31,10 @@ export const VehicleDetails = () => {
                             <p>Calificación: Estrellas</p>
                         </AccordionItem>
                         <AccordionItem title="Colores disponibles">
-                            <ul>
-                                <li>Rojo</li>
-                                <li>Azul</li>
-                                <li>Negro</li>
+                            <ul className="colors">
+                                <li className="color color-red"></li>
+                                <li className="color color-blue"></li>
+                                <li className="color color-black"></li>
                             </ul>
                         </AccordionItem>
                         <AccordionItem title="Descripción">
@@ -43,6 +48,7 @@ export const VehicleDetails = () => {
                     <div className="details__contentDescription-footer">
                         <p>Marca: Honda</p>
                         <Button
+                            onClick={() => setOpenModal(true)}
                             variant="outlined"
                             sx={{
                                 fontSize: "14px",
@@ -62,6 +68,8 @@ export const VehicleDetails = () => {
                     </div>
                 </section>
             </div>
+
+            { openModal && <ModalVehicle onClick={() => setOpenModal(false)}/> }
         </div>
     );
 }

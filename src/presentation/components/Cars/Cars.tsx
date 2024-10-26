@@ -1,9 +1,18 @@
+import { useNavigate } from "react-router-dom"; 
 import brand from "../../../assets/images/DC.png"
 import car from "../../../assets/images/car.png"
 import { Button } from "@mui/material";
 import "./Cars.scss"
 
 export const Cars = () => {
+
+    const navigate = useNavigate();
+
+    const handleDetailsClick = (id: string) => {
+        navigate(`/vehicle-details/${id}`);
+    };
+
+
     return (
         <section className="cars">
             <p className="cars__title">Nuestros carros mas populares </p>
@@ -36,6 +45,7 @@ export const Cars = () => {
                                     color: '#fff'
                                 },
                             }}
+                            onClick={() => handleDetailsClick('1')}
                         >Detalles</Button>
                     </div>
                     <img src={car} alt={car} className="card__img" />
