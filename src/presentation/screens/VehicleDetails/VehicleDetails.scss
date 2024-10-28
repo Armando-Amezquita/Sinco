@@ -11,6 +11,7 @@
     }
 
     &__contentCar{
+        position: relative;
         text-align: center;
         width: 100%;
         padding: 1rem;
@@ -120,4 +121,30 @@
 }
 .color-black{
     background-color: black;
+}
+
+.sold-badge {
+    position: absolute;
+    top: 76px;
+    right: -1px;
+    background-color: rgba(246, 81, 81, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    transform: rotate(45deg);
+    transform-origin: top right;
+    z-index: 10;
+    font-size: 1.5rem;
+}
+
+.sold-badge::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: inherit;
 }

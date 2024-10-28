@@ -1,0 +1,41 @@
+.login{
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: #fef4f4;
+
+  &__container{
+      position: absolute;
+
+  }
+}
+
+.modal-content {
+  position: relative;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 500px;
+  z-index: 22;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2),
+              0 6px 6px rgba(0, 0, 0, 0.1),
+              0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title{
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2e2828;
+
+}

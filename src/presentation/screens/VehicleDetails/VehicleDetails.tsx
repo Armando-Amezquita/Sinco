@@ -9,6 +9,7 @@ import { getVehicleById } from "../../../actions/get-vehicle-by-id";
 import { useParams } from "react-router-dom";
 import { ResponseAPIVehicles } from "../../../infrastructure/interfaces/api-interfaces";
 import GradeIcon from '@mui/icons-material/Grade';
+import { sold } from "../../../actions/sold-vehicle";
 
 export const VehicleDetails = () => {
 
@@ -27,6 +28,14 @@ export const VehicleDetails = () => {
         setLoading(false);
     }
 
+    const soldVehicle = async () => {
+        if(vehicle){
+            await sold(vehicle?._id);
+            setVehicle((prev) => (prev ? { ...prev, sold: true } : null));
+            setOpenModal(false)
+        }
+    }
+
     useEffect(() => {
         setLoading(true);
         handleLoadVehicle();
@@ -41,6 +50,9 @@ export const VehicleDetails = () => {
             <Navbar />
             <div className="details__container">
                 <section className="details__contentCar">
+                    {vehicle?.sold && (
+                        <div className="sold-badge">Vendido</div>
+                    )}
                     <div className="details__contentCar-header">
                         <p className="details__contentCar-headerName">{vehicle?.model}</p>
                         <p className="details__contentCar-headerPrice">$ <span>{vehicle?.value ? Number(vehicle.value).toLocaleString('es-AR') : '0'}</span></p>
@@ -79,6 +91,7 @@ export const VehicleDetails = () => {
                         <Button
                             onClick={() => setOpenModal(true)}
                             variant="outlined"
+                            disabled={vehicle?.sold}
                             sx={{
                                 fontSize: "14px",
                                 borderRadius: '20px',
@@ -98,7 +111,7 @@ export const VehicleDetails = () => {
                 </section>
             </div>
 
-            { openModal && <ModalVehicle onClick={() => setOpenModal(false)}/> }
+            { openModal && <ModalVehicle onClick={() => setOpenModal(false)} action={soldVehicle}/> }
         </div>
     );
 }

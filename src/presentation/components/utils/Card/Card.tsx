@@ -10,9 +10,10 @@ import { ResponseAPIVehicles } from '../../../../infrastructure/interfaces/api-i
 interface Props {
     vehicle: ResponseAPIVehicles;
     index?: number;
+    isActive: boolean;
 }
 
-export const Card = ({ vehicle, index } : Props) => {
+export const Card = ({ vehicle, index, isActive } : Props) => {
 
     const navigate = useNavigate();
 
@@ -64,14 +65,17 @@ export const Card = ({ vehicle, index } : Props) => {
                 }}
                 onClick={ handleDetailsClick }
             >Detalles</Button>
-            <div className="actions">
-                <button className="action">
-                    <EditIcon fontSize="medium" />
-                </button>
-                <button className="action">
-                    <DeleteIcon fontSize="medium"/>
-                </button>
-            </div>
+            {
+                isActive &&
+                <div className="actions">
+                    <button className="action">
+                        <EditIcon fontSize="medium" />
+                    </button>
+                    <button className="action">
+                        <DeleteIcon fontSize="medium"/>
+                    </button>
+                </div>
+            }
         </div>
         <img src={car} alt={car} className="card__img" />
         <div className="card__footer">

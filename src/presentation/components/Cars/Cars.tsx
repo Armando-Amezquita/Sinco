@@ -9,6 +9,7 @@ export const Cars = () => {
     const [loading, setLoading] = useState(false);
     const [vehiclesPopular, setVehiclesPopular] = useState<ResponseAPIVehicles[]>([]);
     const [vehiclesNotPopular, setVehiclesNotPopular] = useState<ResponseAPIVehicles[]>([]);
+    const [token, setToken] = useState<string | null>(null);
 
     const handleLoadVehicles = async () => {
         const data = await getAllVehicles();
@@ -22,6 +23,10 @@ export const Cars = () => {
         handleLoadVehicles();
     }, []);
 
+    useEffect(() => {
+        const storedToken = localStorage.getItem('authToken');
+        setToken(storedToken);
+      }, []);
 
     return (
         <section className="cars">
@@ -30,7 +35,7 @@ export const Cars = () => {
             <div className="cars__content">
                 {
                     !loading && vehiclesPopular.map((vehicle, index) => (
-                        <Card key={vehicle._id} vehicle={vehicle} index={index}/>
+                        <Card key={vehicle._id} vehicle={vehicle} index={index} isActive={!!token?.length}/>
                     ))
                 }
             </div>
@@ -39,7 +44,7 @@ export const Cars = () => {
             <div className="cars__content">
                 {
                     !loading && vehiclesNotPopular.map(vehicle => (
-                        <Card key={vehicle._id} vehicle={vehicle}/>
+                        <Card key={vehicle._id} vehicle={vehicle} isActive={!!token?.length}/>
                     ))
                 }
             </div>

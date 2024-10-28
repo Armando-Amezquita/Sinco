@@ -6,9 +6,11 @@ import { useState } from "react";
 
 interface Props {
     onClick?: () => void;
+    action: () => void;
+
 }
 
-export const ModalVehicle = ({ onClick } : Props ) => {
+export const ModalVehicle = ({ onClick, action } : Props ) => {
 
     const [name, setName] = useState("")
     const [document, setDocument] = useState("");
@@ -79,6 +81,7 @@ export const ModalVehicle = ({ onClick } : Props ) => {
                     type="submit"
                     size="large"
                     disabled={(!name.length || !document.length)} 
+                    onClick={action}
                     sx={{
                         borderRadius: '20px',
                         border: "1px solid #f65151",  
