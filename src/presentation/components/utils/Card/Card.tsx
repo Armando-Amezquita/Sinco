@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import brand from "../../../../assets/images/DC.png"
 import car from "../../../../assets/images/car.png"
 import { ResponseAPIVehicles } from '../../../../infrastructure/interfaces/api-interfaces'
+import "./Card.scss"
 
 interface Props {
     vehicle: ResponseAPIVehicles;
@@ -36,6 +37,9 @@ export const Card = ({ vehicle, index, isActive } : Props) => {
         className={`card`} 
         style={{ backgroundColor }}
     >
+        {vehicle?.sold && (
+            <div className="sold-badge">Vendido</div>
+        )}
         <p className="card__brand">Drive Cycle</p>
         <div className="card__header">
             <div className="card__header-brand">
