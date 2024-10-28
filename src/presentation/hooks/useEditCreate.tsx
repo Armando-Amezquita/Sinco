@@ -3,36 +3,10 @@ import { createVehicle, updateVehicle } from "../../actions/edit-create-vehicle"
 import { SelectChangeEvent } from "@mui/material";
 import { getVehicleById } from "../../actions/get-vehicle-by-id";
 import { ResponseAPIVehicles } from "../../infrastructure/interfaces/api-interfaces";
+import { vehiculos, cilindrajes } from "../../infrastructure/temporalData/temporalData";
+
 
 export const useEditCreate = (vehicleId?: string) => {
-
-    const vehiculos = [
-        // Vehículos
-        { type: "car", model: "Mazda 3 híbrido", price: 100000000 },
-        { type: "car", model: "Toyota Corolla", price: 95000000 },
-        { type: "car", model: "Renault Sandero", price: 60000000 },
-        { type: "car", model: "Chevrolet Onix", price: 75000000 },
-        { type: "car", model: "Ford Escape híbrido", price: 120000000 },
-        { type: "car", model: "Kia Sportage", price: 105000000 },
-        { type: "car", model: "Honda Civic", price: 98000000 },
-        { type: "car", model: "Volkswagen Jetta", price: 90000000 },
-        { type: "car", model: "Hyundai Tucson", price: 110000000 },
-        { type: "car", model: "Nissan Sentra", price: 87000000 },
-        
-        // Motocicletas
-        { type:"motorcicle", model: "Yamaha MT-03", price: 27000000 },
-        { type:"motorcicle", model: "Honda CB 300R", price: 21000000 },
-        { type:"motorcicle", model: "Suzuki Gixxer 250", price: 19000000 },
-        { type:"motorcicle", model: "Kawasaki Ninja 400", price: 28000000 },
-        { type:"motorcicle", model: "BMW G 310 R", price: 24000000 },
-        { type:"motorcicle", model: "KTM Duke 390", price: 26000000 },
-        { type:"motorcicle", model: "Royal Enfield Himalayan", price: 23000000 },
-        { type:"motorcicle", model: "Benelli TNT 300", price: 22000000 },
-        { type:"motorcicle", model: "Bajaj Dominar 250", price: 15000000 },
-        { type:"motorcicle", model: "Hero Xpulse 200", price: 10000000 }
-    ];
-
-    const cilindrajes = [ "50cc", "100cc", "110cc", "125cc", "150cc", "160cc", "180cc", "200cc", "250cc", "300cc", "310cc", "350cc", "390cc"];
 
     const [model, setModel] = useState<{ model: string; type: string; price: number } | null>(null);
     const [isNew, setIsNew] = useState("");
@@ -43,6 +17,8 @@ export const useEditCreate = (vehicleId?: string) => {
     const [calification, setCalification] = useState("");
     const [km, setKm] = useState("");
     const [cilindraje, setCilindraje] = useState("");
+    const [updateFlag, setUpdateFlag] = useState(false);
+
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -63,7 +39,6 @@ export const useEditCreate = (vehicleId?: string) => {
             return;
         }
         
-
         const calificationNumber = parseFloat(calification)
 
         if (isNaN(calificationNumber)) {
@@ -112,6 +87,7 @@ export const useEditCreate = (vehicleId?: string) => {
             await updateVehicle(savedVehicle);
         }else{
             await createVehicle(savedVehicle);
+
             setModel(null)
             setIsNew("")
             setValue("")
@@ -120,7 +96,9 @@ export const useEditCreate = (vehicleId?: string) => {
             setSold("")
             setCalification("")
             setKm("")
-            setCilindraje("")
+            setCilindraje("");
+            setUpdateFlag((prev) => !prev);
+
         }
     }
 
@@ -168,6 +146,7 @@ export const useEditCreate = (vehicleId?: string) => {
     cilindraje,
     vehiculos, 
     cilindrajes,
+    updateFlag,
 
     //Methods
     setModel,

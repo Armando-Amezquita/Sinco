@@ -3,11 +3,13 @@ import { Navbar } from "../../components/Navbar/Navbar"
 import "./EditCreate.scss"
 import { useEditCreate } from "../../hooks/useEditCreate";
 import { useParams } from "react-router-dom";
+import { Statistics } from "../../components/Statistics/Statistics";
 
 export const EditCreate = () => {
 
     const { id } = useParams<{ id: string }>();
     const isEditMode = Boolean(id);
+
     
     const {
         //Properties
@@ -38,9 +40,12 @@ export const EditCreate = () => {
 
   return (
     <div className="edit">
+         
         <Navbar />
+        <Statistics />
+
         <form className="edit__content" onSubmit={handleSubmit}>
-            <h2>Editar Vehiculo</h2>
+            <h2 className="edit__content-title">{ id?.length ? "Edita el vehiculo" : "Crear vehiculo"}</h2>
             <div className="edit__form">
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Modelo</InputLabel>
@@ -281,7 +286,7 @@ export const EditCreate = () => {
                       color: '#fff',
                   },
               }}
-          > Crear</Button>
+          > Guardar</Button>
                 
         </form>
     </div>
