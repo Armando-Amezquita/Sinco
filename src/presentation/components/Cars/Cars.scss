@@ -9,6 +9,12 @@
         margin: 2rem 0; 
     }
 
+    &__titleContainer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     &__title{
         font-size: 2rem;
         color: #503a3a;

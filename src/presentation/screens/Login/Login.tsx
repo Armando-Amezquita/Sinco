@@ -34,7 +34,7 @@ export const Login = () => {
           <Button
               variant="text"
               type="submit"
-              onClick={handleLogin}
+              onClick={() => navigate("/")}
               sx={{
                   position: 'absolute',
                   top: "1rem",

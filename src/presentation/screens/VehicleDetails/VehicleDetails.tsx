@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
-import img from "../../../assets/images/car.png"
+import car from "../../../assets/images/car.png"
+import moto from "../../../assets/images/moto1.png"
 import { AccordionItem } from "../../components/utils/Accordion/Accordion";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { ModalVehicle } from "../../components/ModalVehicle/ModalVehicle";
@@ -57,7 +58,7 @@ export const VehicleDetails = () => {
                         <p className="details__contentCar-headerName">{vehicle?.model}</p>
                         <p className="details__contentCar-headerPrice">$ <span>{vehicle?.value ? Number(vehicle.value).toLocaleString('es-AR') : '0'}</span></p>
                     </div>
-                    <img src={img} alt={img} className="details__contentCar-img" />
+                    <img src={vehicle?.typeVehicle === 'car' ? car : moto} alt={vehicle?.typeVehicle === 'car' ? car : moto} className="details__contentCar-img" />
 
                     <div className="details__contentCar-imgContent">
                         <p className="details__contentCar-otherImgs">others images</p>

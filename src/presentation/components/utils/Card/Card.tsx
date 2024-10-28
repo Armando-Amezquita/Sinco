@@ -5,6 +5,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import brand from "../../../../assets/images/DC.png"
 import car from "../../../../assets/images/car.png"
+import moto from "../../../../assets/images/moto1.png"
+
 import { ResponseAPIVehicles } from '../../../../infrastructure/interfaces/api-interfaces'
 import "./Card.scss"
 
@@ -72,16 +74,19 @@ export const Card = ({ vehicle, index, isActive } : Props) => {
             {
                 isActive &&
                 <div className="actions">
-                    <button className="action">
-                        <EditIcon fontSize="medium" />
-                    </button>
-                    <button className="action">
+                    {
+                        !vehicle.sold && 
+                        <button onClick={() => navigate(`/edit-create/${vehicle._id}`)} className="action">
+                            <EditIcon fontSize="medium" />
+                        </button>
+                    }
+                    {/* <button className="action">
                         <DeleteIcon fontSize="medium"/>
-                    </button>
+                    </button> */}
                 </div>
             }
         </div>
-        <img src={car} alt={car} className="card__img" />
+        <img src={vehicle.typeVehicle === "car" ? car : moto } alt={vehicle.typeVehicle === "car" ? car : moto} className="card__img" />
         <div className="card__footer">
             <p> kilometraje: {vehicle.km}</p>
             <p className="details__contentCar-headerPrice">$ <span>{vehicle?.value ? Number(vehicle.value).toLocaleString('es-AR') : '0'}</span></p>
