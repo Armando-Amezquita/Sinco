@@ -1,14 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import img from "../../../assets/images/car.png"
 import { AccordionItem } from "../../components/utils/Accordion/Accordion";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { ModalVehicle } from "../../components/ModalVehicle/ModalVehicle";
 import './VehicleDetails.scss'
+import { getVehicleById } from "../../../actions/get-vehicle-by-id";
+import { useParams } from "react-router-dom";
+import { ResponseAPIVehicles } from "../../../infrastructure/interfaces/api-interfaces";
+import GradeIcon from '@mui/icons-material/Grade';
 
 export const VehicleDetails = () => {
 
+    const params = useParams();
+
     const [openModal, setOpenModal] = useState<boolean>(false);
+
+    const [loading, setLoading] = useState(false);
+    const [vehicle, setVehicle] = useState<ResponseAPIVehicles | null >();
+
+    const handleLoadVehicle = async () => {
+        if (params.id) {
+            const data = await getVehicleById(params.id);
+            setVehicle(data);
+        }
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        setLoading(true);
+        handleLoadVehicle();
+    }, []);
+
+    if(loading){
+        return <p>Cargando...</p>
+    }
 
     return (
         <div className="details">
@@ -16,8 +42,8 @@ export const VehicleDetails = () => {
             <div className="details__container">
                 <section className="details__contentCar">
                     <div className="details__contentCar-header">
-                        <p className="details__contentCar-headerName">Honda</p>
-                        <p className="details__contentCar-headerPrice">$<span>899</span></p>
+                        <p className="details__contentCar-headerName">{vehicle?.model}</p>
+                        <p className="details__contentCar-headerPrice">$ <span>{vehicle?.value ? Number(vehicle.value).toLocaleString('es-AR') : '0'}</span></p>
                     </div>
                     <img src={img} alt={img} className="details__contentCar-img" />
 
@@ -28,7 +54,10 @@ export const VehicleDetails = () => {
                 <section className="details__contentDescription">
                     <div>
                         <AccordionItem title="Calificación">
-                            <p>Calificación: Estrellas</p>
+                            {
+                                Array.from({ length: Number(vehicle?.calification)|| 0 }, (_, i) => (
+                                    <GradeIcon key={i} style={{ color: '#FFD700' }} /> ))
+                            }
                         </AccordionItem>
                         <AccordionItem title="Colores disponibles">
                             <ul className="colors">
@@ -38,15 +67,15 @@ export const VehicleDetails = () => {
                             </ul>
                         </AccordionItem>
                         <AccordionItem title="Descripción">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit...</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quisquam sunt perspiciatis molestiae velit nisi, molestias enim iure, minus at tempore. Asperiores, quidem? Nesciunt minus vitae quae aperiam, at possimus!</p>
                         </AccordionItem>
                         <AccordionItem title="Características">
-                            <p>Fecha de Registro: 2023-01-15</p>
-                            <p>Popular: true</p>
+                            {/* <p>Fecha de Registro: { vehicle?.registerDate ? vehicle.registerDate.toLocaleDateString() : 'N/A' }</p> */}
+                            { vehicle?.popular && <p>Popular</p> }
                         </AccordionItem>
                     </div>
                     <div className="details__contentDescription-footer">
-                        <p>Marca: Honda</p>
+                        <p>{ vehicle?.model }</p>
                         <Button
                             onClick={() => setOpenModal(true)}
                             variant="outlined"

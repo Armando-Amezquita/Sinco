@@ -1,10 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import brand from "../../../assets/images/DC.png";
 import "./Navbar.scss";
 
 export const Navbar = () => {
+
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/dashboard");
+  }
 
   return (
     <nav className="navbar">
@@ -16,6 +22,7 @@ export const Navbar = () => {
         <Button
           variant="contained"
           type="submit"
+          onClick={handleNavigate}
           sx={{
             width: '120px',
             backgroundColor: '#f65151',

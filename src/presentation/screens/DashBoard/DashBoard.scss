@@ -1,0 +1,25 @@
+.dashboard{
+    min-height: 100vh;
+    min-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    background-color: #fef4f4;
+
+    &__content{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 2rem;
+        
+        &-title{
+            font-size: 2rem;
+            font-weight: 600;
+            color: #503a3a;
+        }
+    }
+    &__filters{
+        width: 100%;
+        height: 120px;
+        background: #fff;
+    }
+}
